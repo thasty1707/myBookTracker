@@ -1,1 +1,72 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
 
+h1{
+    font-size: 24px;
+}
+
+#addBookForm{
+    border: 1px solid black;
+    display: grid;
+    grid-template:
+        .5fr 2fr 1fr
+        .5fr 2fr 1fr
+        .5fr 2fr 1fr
+        .5fr 2fr 1fr
+        .5fr 2fr 1fr
+        .5fr 2fr 1fr;
+    width: 700px;
+    padding: .5em;
+    grid-row-gap: 10px;
+}
+
+h2{
+    grid-area: 1 / 1 / span 1 / span 3;
+    font-size: 18px;
+}
+
+#bookTitle{
+    grid-area: 2 / 1 / span 1 / span 2;
+}
+
+#bookAuthor{
+    grid-area: 3 / 1 / span 1 / span 2;
+}
+
+#bookLength{
+    grid-area: 4/1/5/2;
+    width: 150px;
+}
+
+#readYet{
+    grid-area: 5 / 1 / span 1 / span 1;
+    margin-top: 8px;
+    width: 150px;
+}
+
+#addBook{
+    grid-area: 6 / 1 / span 1 / span 3;
+
+}
+
+.formBtns{
+    width: 120px;
+    font-size: 16px;
+}
+
+/* #viewBookForm{
+    border: 1px solid black;
+    display: grid;
+    grid-template:
+        1fr 2fr 1fr
+        1fr 2fr 1fr
+        1fr 2fr 1fr
+        1fr 2fr 1fr
+        1fr 2fr 1fr
+        1fr 2fr 1fr;
+    width: 700px;
+    padding: .5em;
+    grid-row-gap: 10px;
+} */

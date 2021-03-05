@@ -55,18 +55,3 @@ h2{
     width: 120px;
     font-size: 16px;
 }
-
-/* #viewBookForm{
-    border: 1px solid black;
-    display: grid;
-    grid-template:
-        1fr 2fr 1fr
-        1fr 2fr 1fr
-        1fr 2fr 1fr
-        1fr 2fr 1fr
-        1fr 2fr 1fr
-        1fr 2fr 1fr;
-    width: 700px;
-    padding: .5em;
-    grid-row-gap: 10px;
-} */

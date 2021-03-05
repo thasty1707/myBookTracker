@@ -4,10 +4,10 @@
     <script src="bookTracker.js" defer></script>
 </head>
 <title>
-    JS Objects Exercises
+    thasty1707's Book Tracker
 </title>
 <body>
-    <h1 id="appTitle">thasty1707's Library App</h1>
+    <h1 id="appTitle">Book Tracker</h1>
     <form id="addBookForm">
         <h2 id="formTitle">Add a Book to the Library:</h2>
         <input type="text" id="bookTitle" class="inputFields" placeholder="Title">
@@ -16,22 +16,13 @@
         <input type="text" id="readYet" class="inputFields" placeholder="Have you read it? (Y/N)">
         <button type="button" id="addBook" class="formBtns">Add Book</button>
     </form><br><br>
-    <!-- <form id="viewBookForm">
-        <h3 id="formTitle">View a Book in the Library:</h2>
-        <label for="#titleChoices" id="viewTitleLabel" class="viewLabels">Title: </label>
-        <div class="titleDiv">
-            <p onclick="viewBook()" class="titleChoices">Choose a Title:</p>
-            <div id="titleMenu" id="titleDrpDwn" class="titleContent">
-                <a href="#">The Hobbit</a>
-            </div>
-        </div>
+    <table id="bookListing">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Number of Pages</th>
+            <th>Have I read it?</th>
+        </tr>
 
-        <label for="#viewAuthor" id="viewAuthorLabel" class="viewLabels">Author: </label>
-        <p type="text" id="viewAuthor" class="viewFields"></p>
-        <label for="#viewLength" id="viewLengthLabel" class="viewLabels">Length: </label>
-        <p type="text" id="viewLength" class="viewFields"></p>
-        <label for="#viewReadStatus" class="viewLabels">Have you read it?: </label>
-        <p id="viewReadStatus" class="viewFields"></p>
-        <button type="button" id="deleteBook" class="formBtns">Delete Book</button>
-    </form> -->
+    </table>
 </body>

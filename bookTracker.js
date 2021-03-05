@@ -4,7 +4,9 @@
 // const viewStatus = document.getElementById("viewReadStatus").innerText;
 
 
-let myLibrary = [];
+let myLibrary = [
+    // Book{}
+];
 
 function Book(title, author, bookLength, haveReadYet){
     this.title = title

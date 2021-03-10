@@ -33,13 +33,12 @@ function addBookToLibrary(){
         myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
     };
 
-
-
-    //Populate table with book data from myLibrary array
+    //Reset input fields
     resetInput();
     console.log(myLibrary);
 };
-listBooks();
+
+
 
 //Function to clear form fields; called after adding new Book to Library
 function resetInput(){
@@ -54,20 +53,20 @@ function listBooks(){
     let bookTable = document.getElementById("tableOfBooks");
 
     for(let i = 0; i < myLibrary.length; i++){
-        // let newBook = myLibrary[i];
-        let newRow = document.createElement("tr");
-        let bookProperties = ['title', 'author', 'pages', 'readIt'];
+        let newBook = myLibrary[i];
+        newRow = document.createElement("tr");
+        bookProperties = ['title', 'author', 'pages', 'readIt'];
 
         for (let j = 0; j < bookProperties.length; j++){
-            let cell = document.createElement('td');
-            cell.innerHTML = myLibrary[bookProperties[j]];
+            cell = document.createElement('td');
+            cell.innerHTML = newBook[bookProperties[j]];
             
             newRow.appendChild(cell);
         };
-
         bookTable.appendChild(newRow);
     };
 };
+listBooks();
 
 //Remove spaces from a title
 let titleId1 = myLibrary[0].title.replace(/\s+/g, '');

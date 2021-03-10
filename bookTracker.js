@@ -1,12 +1,4 @@
-// const viewTitle = document.getElementById("viewTitle").innerText;
-// const viewAuthor = document.getElementById("viewAuthor").innerText;
-// const viewLength = document.getElementById("viewLength").innerText;
-// const viewStatus = document.getElementById("viewReadStatus").innerText;
-
-
-let myLibrary = [
-    // Book{}
-];
+let myLibrary = [];
 
 function Book(title, author, bookLength, haveReadYet){
     this.title = title
@@ -15,26 +7,39 @@ function Book(title, author, bookLength, haveReadYet){
     this.readIt = haveReadYet
 };
 
+//Test book data
+const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien",274,"Yes"));
+const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", 372, "Yes"));
+
 //Function to add new books to the Library
-function addBookToLibrary(){
+function addBookToLibrary(){    
     //Pull values of input fields
     let bookTitle = document.getElementById("bookTitle").value;
     let bookAuthor = document.getElementById("bookAuthor").value;
     let bookLength = document.getElementById("bookLength").value;
     let readStatus = document.getElementById("readYet").value;
 
-    //Use values to push new object into myLibrary object
-    myLibrary.push(new Book(bookTitle,bookAuthor,bookLength,readStatus));
+    //Check input and use values to push new object into myLibrary object
+    if(bookTitle == ""){
+        alert("Please enter a title for the new book!");
+        return;
+    }else if(bookAuthor == ""){
+        alert("Please enter an author for the new book!");
+        return;
+    }else if(bookLength == ""){
+        alert("Please enter the number of pages for the new book!");
+        return;
+    }else{
+        myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
+    };
 
-    //Alert to user of book just entered
-    alert("Book Added\: " + bookTitle +", by " + bookAuthor + ", " + bookLength + " pages. " +
-        "\r\n" + "Read?: " + readStatus);
 
-    //Check to make sure it works
-    console.log(myLibrary);
 
+    //Populate table with book data from myLibrary array
     resetInput();
+    console.log(myLibrary);
 };
+listBooks();
 
 //Function to clear form fields; called after adding new Book to Library
 function resetInput(){
@@ -42,15 +47,30 @@ function resetInput(){
     document.getElementById("bookAuthor").value = "";
     document.getElementById("bookLength").value = "";
     document.getElementById("readYet").value = "";
-}
-
-function viewBook(){
-
 };
 
-//Toggle hiding/showing dropdown menu content
-// function showTitles(){
-//     document.getElementById("titleMenu").classList.toggle("show");
-// };
+function listBooks(){
+    //Variables for the table to list books on page
+    let bookTable = document.getElementById("tableOfBooks");
+
+    for(let i = 0; i < myLibrary.length; i++){
+        // let newBook = myLibrary[i];
+        let newRow = document.createElement("tr");
+        let bookProperties = ['title', 'author', 'pages', 'readIt'];
+
+        for (let j = 0; j < bookProperties.length; j++){
+            let cell = document.createElement('td');
+            cell.innerHTML = myLibrary[bookProperties[j]];
+            
+            newRow.appendChild(cell);
+        };
+
+        bookTable.appendChild(newRow);
+    };
+};
+
+//Remove spaces from a title
+let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
 
 let addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
+

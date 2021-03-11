@@ -50,9 +50,11 @@ function resetInput(){
 };
 
 function listBooks(){
+    
     //Variables for the table to list books on page
     let bookTable = document.getElementById("tableOfBooks");
-
+    let libLength = myLibrary.length;
+    
     for(let i = 0; i < myLibrary.length; i++){
         let newBook = myLibrary[i];
         newRow = document.createElement("tr");
@@ -72,31 +74,15 @@ function listBooks(){
         };
         bookTable.appendChild(newRow);
     };
-};
+}; 
 listBooks();
 
-function appendBookList(){
+//Function to clear table before refilling?
+function emptyTable(){
     let bookTable = document.getElementById("tableOfBooks");
-    let newBook = myLibrary[myLibrary.length - 1];
-    let newRow = document.createElement("tr");
-    newRow.className = "bookRow";
-    let i = myLibrary.length;
-    // bookProperties = ['title', 'author', 'pages', 'readIt'];
-
-    let newTitle = document.createElement('td')
-    newTitle.innerHTML = myLibrary[i].title;
-
-    let 
-
-    /* for (let j = 0; j < bookProperties.length; j++){
-        cell = document.createElement('td');
-        cell.innerHTML = newBook[bookProperties[j]];
-        
-        newRow.appendChild(cell);
-    };
-    bookTable.appendChild(newRow);
-    console.log(newBook); */
-}
+    let rowCount = bookTable.childElementCount;
+    while(rowCount > 0){bookTable.removeChild}
+};
 
 //Remove spaces from a title
 // let titleId1 = myLibrary[0].title.replace(/\s+/g, '');

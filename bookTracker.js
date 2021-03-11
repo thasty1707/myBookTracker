@@ -33,6 +33,7 @@ function addBookToLibrary(){
         myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
     };
 
+
     //Reset input fields
     resetInput();
     console.log(myLibrary);
@@ -55,12 +56,18 @@ function listBooks(){
     for(let i = 0; i < myLibrary.length; i++){
         let newBook = myLibrary[i];
         newRow = document.createElement("tr");
+        newRow.className = "bookRow";
         bookProperties = ['title', 'author', 'pages', 'readIt'];
+
+        //Add cell to show Number of books
+        firstCell = document.createElement('td');
+        firstCell.innerHTML = i + 1;
+        newRow.appendChild(firstCell);
 
         for (let j = 0; j < bookProperties.length; j++){
             cell = document.createElement('td');
             cell.innerHTML = newBook[bookProperties[j]];
-            
+
             newRow.appendChild(cell);
         };
         bookTable.appendChild(newRow);
@@ -68,8 +75,31 @@ function listBooks(){
 };
 listBooks();
 
+function appendBookList(){
+    let bookTable = document.getElementById("tableOfBooks");
+    let newBook = myLibrary[myLibrary.length - 1];
+    let newRow = document.createElement("tr");
+    newRow.className = "bookRow";
+    let i = myLibrary.length;
+    // bookProperties = ['title', 'author', 'pages', 'readIt'];
+
+    let newTitle = document.createElement('td')
+    newTitle.innerHTML = myLibrary[i].title;
+
+    let 
+
+    /* for (let j = 0; j < bookProperties.length; j++){
+        cell = document.createElement('td');
+        cell.innerHTML = newBook[bookProperties[j]];
+        
+        newRow.appendChild(cell);
+    };
+    bookTable.appendChild(newRow);
+    console.log(newBook); */
+}
+
 //Remove spaces from a title
-let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
+// let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
 
 let addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
 

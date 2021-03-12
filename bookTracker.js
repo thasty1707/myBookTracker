@@ -18,7 +18,16 @@ function addBookToLibrary(){
     let bookTitle = document.getElementById("bookTitle").value;
     let bookAuthor = document.getElementById("bookAuthor").value;
     let bookLength = String(document.getElementById("bookLength").value + " pages");
-    let readStatus = document.getElementById("readYet").value;
+    let readStatus = "";
+
+    let readYetBox = document.getElementById("readYet");
+    if(readYetBox.checked === true){
+        readStatus = document.createElement('input');
+    }else{
+        readStatus = "No";
+    };
+    console.log(readStatus)
+
 
      //Check input and use values to push new object into myLibrary object
     /* if(bookTitle == ""){
@@ -59,8 +68,6 @@ function addBookToLibrary(){
 
     //Reset input fields
     resetInput();
-
-    console.log(myLibrary);
 };
 
 
@@ -70,13 +77,14 @@ function resetInput(){
     document.getElementById("bookTitle").value = "";
     document.getElementById("bookAuthor").value = "";
     document.getElementById("bookLength").value = "";
-    document.getElementById("readYet").value = "";
+    if(document.getElementById("readYet").checked == true){
+        document.getElementById("readYet").checked = false;
+    };
 };
 
-function listBooks(){
+function listCurrentBooks(){
     //Variables for the table to list books on page
     let bookTable = document.getElementById("tableOfBooks");
-    let libLength = myLibrary.length;
     
     for(let i = 0; i < myLibrary.length; i++){
         let newBook = myLibrary[i];
@@ -103,10 +111,10 @@ function listBooks(){
         bookTable.appendChild(newRow);
     };
 }; 
-listBooks();
+listCurrentBooks();
 
 function deleteBook(){
-    
+
 }
 
 //Remove spaces from a title

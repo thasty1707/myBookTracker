@@ -40,9 +40,9 @@ h2{
     width: 150px;
 }
 
-#readYet{
-    grid-area: 5 / 1 / span 1 / span 1;
-    margin-top: 8px;
+#readYetDiv{
+    grid-area: 5 / 1 / 6 / 3;
+    margin-top: 8px 0;
     width: 150px;
 }
 

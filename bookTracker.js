@@ -8,8 +8,9 @@ function Book(title, author, bookLength, haveReadYet){
 };
 
 //Test book data
-const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages","Yes"));
-const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "Yes"));
+
+const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "yes"));
+const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "yes"));
 
 //Function to add new books to the Library
 function addBookToLibrary(){    
@@ -37,7 +38,6 @@ function addBookToLibrary(){
 
     let bookTable = document.getElementById("tableOfBooks");
     let newRow = document.createElement("tr");
-    newRow.className = "bookRow";
     let newBook = myLibrary[myLibrary.length - 1];
     let bookProperties = ['title', 'author', 'pages', 'readIt'];
     
@@ -46,11 +46,15 @@ function addBookToLibrary(){
     newRow.appendChild(firstCell);
     
     for(let i = 0; i < bookProperties.length; i++){
-
         cell = document.createElement('td');
         cell.innerHTML = newBook[bookProperties[i]];
         newRow.appendChild(cell);
     };
+
+    let lastCell = document.createElement('td');
+    lastCell.innerHTML = "<button id='deleteBook';>X</button>";
+    newRow.appendChild(lastCell);
+
     bookTable.appendChild(newRow);
 
     //Reset input fields
@@ -91,20 +95,22 @@ function listBooks(){
 
             newRow.appendChild(cell);
         };
+
+        let lastCell = document.createElement('td');
+        lastCell.innerHTML = "<button id='deleteBook';>X</button>";
+        newRow.appendChild(lastCell);
+
         bookTable.appendChild(newRow);
     };
 }; 
 listBooks();
 
-//Function to clear table before refilling? Causes bad latency
-/* function emptyTable(){
-    let bookTable = document.getElementById("tableOfBooks");
-    let rowCount = bookTable.childElementCount;
-    while(rowCount > 1){bookTable.removeChild}
-}; */
+function deleteBook(){
+    
+}
 
 //Remove spaces from a title
 // let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
 
 let addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
-
+let deleteButton = document.getElementById("deleteBook").addEventListener('click',deleteBook);

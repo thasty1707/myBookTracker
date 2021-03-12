@@ -45,6 +45,8 @@ function addBookToLibrary(){
 
     let bookTable = document.getElementById("tableOfBooks");
     let newRow = document.createElement("tr");
+    newRow.className = "bookRow";
+    newRow.setAttribute('id',(myLibrary.length - 1))
     let newBook = myLibrary[myLibrary.length - 1];
     let bookProperties = ['title', 'author', 'pages'];
     
@@ -96,6 +98,7 @@ function listCurrentBooks(){
         let newBook = myLibrary[i];
         newRow = document.createElement("tr");
         newRow.className = "bookRow";
+        newRow.setAttribute('id',i)
         bookProperties = ['title', 'author', 'pages', 'readIt'];
 
         //Add cell to show Number of books

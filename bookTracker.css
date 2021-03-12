@@ -94,7 +94,3 @@ tr:nth-child(odd){
 button:active{
     transform: translateY(2px);
 }
-
-#checkbox{
-
-}

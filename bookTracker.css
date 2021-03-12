@@ -57,7 +57,15 @@ h2{
 }
 
 table{
-    width: 700px;
+    width: 750px;
     padding: .5em;
     text-align: center;
+}
+
+th{
+    background-color: lightskyblue;
+}
+
+tr:nth-child(odd){
+    background-color: azure;
 }

@@ -54,6 +54,13 @@ h2{
 .formBtns{
     width: 120px;
     font-size: 16px;
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 5%;
+}
+
+.formBtns:hover{
+    background-color: lightgreen;
 }
 
 table{
@@ -68,4 +75,24 @@ th{
 
 tr:nth-child(odd){
     background-color: azure;
+}
+
+#deleteBook{
+    border: none;
+    background-color: white;
+    color: red;
+}
+
+#deleteBook:hover{
+    border: 2px solid black;
+    background-color: red;
+    color: white;
+}
+
+button:active{
+    transform: translateY(2px);
+}
+
+#checkbox{
+
 }

@@ -1,4 +1,5 @@
 let myLibrary = [];
+let deleteButton = document.getElementById("deleteBook")
 
 function Book(title, author, bookLength, haveReadYet){
     this.title = title
@@ -9,8 +10,8 @@ function Book(title, author, bookLength, haveReadYet){
 
 //Test book data
 
-const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "yes"));
-const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "yes"));
+const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "<input type='checkbox' checked=true;>"));
+// const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "<input type='checkbox' checked=true;>"));
 
 //Function to add new books to the Library
 function addBookToLibrary(){    
@@ -22,15 +23,14 @@ function addBookToLibrary(){
 
     let readYetBox = document.getElementById("readYet");
     if(readYetBox.checked === true){
-        readStatus = document.createElement('input');
+        readStatus = "true"
     }else{
-        readStatus = "No";
+        readStatus = "false"
     };
-    console.log(readStatus)
 
 
      //Check input and use values to push new object into myLibrary object
-    /* if(bookTitle == ""){
+    if(bookTitle == ""){
         alert("Please enter a title for the new book!");
         return;
     }else if(bookAuthor == ""){
@@ -41,27 +41,34 @@ function addBookToLibrary(){
         return;
     }else{
         myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
-    }; */
-
-    myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
+    };
 
     let bookTable = document.getElementById("tableOfBooks");
     let newRow = document.createElement("tr");
     let newBook = myLibrary[myLibrary.length - 1];
-    let bookProperties = ['title', 'author', 'pages', 'readIt'];
+    let bookProperties = ['title', 'author', 'pages'];
     
     firstCell = document.createElement('td');
+    firstCell.setAttribute("id",(myLibrary.length - 1));
     firstCell.innerHTML = (myLibrary.length);
     newRow.appendChild(firstCell);
     
-    for(let i = 0; i < bookProperties.length; i++){
+    for(let i = 0; i < (bookProperties.length + 1); i++){
         cell = document.createElement('td');
         cell.innerHTML = newBook[bookProperties[i]];
         newRow.appendChild(cell);
     };
 
+    if(readStatus == "true"){
+        cell.innerHTML = "<input type='checkbox' id='checkbox' checked=true;>";
+        newRow.appendChild(cell);
+    }else{
+        cell.innerHTML = "<input type='checkbox';>";
+        newRow.appendChild(cell);
+    };
+
     let lastCell = document.createElement('td');
-    lastCell.innerHTML = "<button id='deleteBook';>X</button>";
+    lastCell.innerHTML = "<button id='deleteBook';><strong>X</strong></button>";
     newRow.appendChild(lastCell);
 
     bookTable.appendChild(newRow);
@@ -94,6 +101,7 @@ function listCurrentBooks(){
 
         //Add cell to show Number of books
         firstCell = document.createElement('td');
+        firstCell.setAttribute("id",i);
         firstCell.innerHTML = i + 1;
         newRow.appendChild(firstCell);
 
@@ -105,7 +113,7 @@ function listCurrentBooks(){
         };
 
         let lastCell = document.createElement('td');
-        lastCell.innerHTML = "<button id='deleteBook';>X</button>";
+        lastCell.innerHTML = "<button id='deleteBook';><strong>X</strong></button>";
         newRow.appendChild(lastCell);
 
         bookTable.appendChild(newRow);
@@ -120,5 +128,8 @@ function deleteBook(){
 //Remove spaces from a title
 // let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
 
+if(deleteButton){
+    deleteButton.addEventListener('click',deleteBook);
+};
+
 let addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
-let deleteButton = document.getElementById("deleteBook").addEventListener('click',deleteBook);

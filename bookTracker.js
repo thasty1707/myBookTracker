@@ -49,7 +49,6 @@ function addBookToLibrary(){
     let bookProperties = ['title', 'author', 'pages'];
     
     firstCell = document.createElement('td');
-    firstCell.setAttribute("id",(myLibrary.length - 1));
     firstCell.innerHTML = (myLibrary.length);
     newRow.appendChild(firstCell);
     
@@ -68,7 +67,7 @@ function addBookToLibrary(){
     };
 
     let lastCell = document.createElement('td');
-    lastCell.innerHTML = "<button id='deleteBook';><strong>X</strong></button>";
+    lastCell.innerHTML = "<button class='deleteBook';><strong>X</strong></button>";
     newRow.appendChild(lastCell);
 
     bookTable.appendChild(newRow);
@@ -101,7 +100,6 @@ function listCurrentBooks(){
 
         //Add cell to show Number of books
         firstCell = document.createElement('td');
-        firstCell.setAttribute("id",i);
         firstCell.innerHTML = i + 1;
         newRow.appendChild(firstCell);
 
@@ -113,7 +111,8 @@ function listCurrentBooks(){
         };
 
         let lastCell = document.createElement('td');
-        lastCell.innerHTML = "<button id='deleteBook';><strong>X</strong></button>";
+        lastCell.innerHTML = "<button class='deleteBook';><strong>X</strong></button>";
+
         newRow.appendChild(lastCell);
 
         bookTable.appendChild(newRow);
@@ -127,9 +126,5 @@ function deleteBook(){
 
 //Remove spaces from a title
 // let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
-
-if(deleteButton){
-    deleteButton.addEventListener('click',deleteBook);
-};
 
 let addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);

@@ -29,8 +29,6 @@ function addBookToLibrary(){
         readStatus = "No"
     };
 
-    console.log(readStatus);
-
      //Check input and use values to push new object into myLibrary object
     if(bookTitle == ""){
         alert("Please enter a title for the new book!");
@@ -147,17 +145,16 @@ listBooks();
 //Function to remove books from myLibrary and bookTable
 function deleteBook(){
     let thisCell = this.parentNode;
-    let cellParent = thisCell.parentNode;
-    console.log(thisCell);
-    console.log(cellParent);
-    console.log(cellParent.id);
-    console.log(myLibrary[cellParent.id]);
-    // myLibrary[thisRowId].splice();
-    // listBooks();
+    let cellParentId = thisCell.parentNode.id;
+    console.log(cellParentId);
+    myLibrary.splice(cellParentId, 1);
+
+    console.log(myLibrary);
+    
+    listBooks();
 };
 
-//Remove spaces from a title
-// let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
 
-let addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
-let deleteButtons = document.getElementsByClassName("deleteBook");
+const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
+let deleteButtons = document.querySelectorAll(".deleteBook");
+deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteBook));

@@ -1,7 +1,6 @@
-let bookTable = document.getElementById("tableOfBooks");
+const bookTable = document.getElementById("tableOfBooks");
 
 let myLibrary = [];
-let deleteButton = document.getElementById("deleteBook")
 
 function Book(title, author, bookLength, haveReadYet){
     this.title = title
@@ -12,8 +11,8 @@ function Book(title, author, bookLength, haveReadYet){
 
 //Test book data
 
-const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "<input type='checkbox' checked=true;>"));
-const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "<input type='checkbox' checked=true;>"));
+const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "Yes"));
+const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "No"));
 
 //Function to add new books to the Library
 function addBookToLibrary(){   
@@ -25,11 +24,12 @@ function addBookToLibrary(){
 
     let readYetBox = document.getElementById("readYet");
     if(readYetBox.checked === true){
-        readStatus = "true"
+        readStatus = "Yes"
     }else{
-        readStatus = "false"
+        readStatus = "No"
     };
 
+    console.log(readStatus);
 
      //Check input and use values to push new object into myLibrary object
     if(bookTitle == ""){
@@ -45,39 +45,9 @@ function addBookToLibrary(){
         myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
     };
 
-    let bookTable = document.getElementById("tableOfBooks");
-    let newRow = document.createElement("tr");
-    newRow.className = "bookRow";
-    newRow.setAttribute('id',(myLibrary.length - 1))
-    let newBook = myLibrary[myLibrary.length - 1];
-    let bookProperties = ['title', 'author', 'pages'];
-    
-    firstCell = document.createElement('td');
-    firstCell.innerHTML = (myLibrary.length);
-    newRow.appendChild(firstCell);
-    
-    for(let i = 0; i < (bookProperties.length + 1); i++){
-        cell = document.createElement('td');
-        cell.innerHTML = newBook[bookProperties[i]];
-        newRow.appendChild(cell);
-    };
+    //list books with new entry
+    listBooks();
 
-    if(readStatus == "true"){
-        cell.innerHTML = "<input type='checkbox' id='checkbox' checked=true;>";
-        newRow.appendChild(cell);
-    }else{
-        cell.innerHTML = "<input type='checkbox';>";
-        newRow.appendChild(cell);
-    };
-
-    let lastCell = document.createElement('td');
-    lastCell.innerHTML = "<button class='deleteBook';><strong>X</strong></button>";
-    newRow.appendChild(lastCell);
-
-    bookTable.appendChild(newRow);
-   
-
-    // listCurrentBooks();
     //Reset input fields after new entry
     resetInput();
 };
@@ -92,43 +62,102 @@ function resetInput(){
     };
 };
 
-function listCurrentBooks(){
+function listBooks(){
     //Variables for the table to list books on page
     let bookTable = document.getElementById("tableOfBooks");
     
+    //Clear the bookTable before refilling
+    while(bookTable.firstChild){
+        bookTable.removeChild(bookTable.firstChild);
+    };
+
+    //Create headers and append to bookTable
+    let tableHeaders = ['Book No.', 'Title', 'Author', 'Length', 'Read', 'Delete']
+
+    let bookTableHead = document.createElement('thead');
+    bookTableHead.setAttribute('id', 'bookTableHead');
+
+    let bookTableHeaderRow = document.createElement('tr');
+    bookTableHeaderRow.setAttribute('id', 'bookHeaderRow');
+
+    tableHeaders.forEach(header => {
+        let bookHeader = document.createElement('th');
+        bookHeader.innerText = header;
+        bookTableHeaderRow.append(bookHeader);
+    });
+
+    bookTableHead.append(bookTableHeaderRow);
+    bookTable.append(bookTableHead);
+
+    //Loop through myLibrary array ato fill the bookTable
     for(let i = 0; i < myLibrary.length; i++){
+        //Variable to get book info
         let newBook = myLibrary[i];
+        //Variable to create rows on the bookTable
         newRow = document.createElement("tr");
         newRow.className = "bookRow";
         newRow.setAttribute('id',i)
-        bookProperties = ['title', 'author', 'pages', 'readIt'];
 
-        //Add cell to show Number of books
+        //object to help with looping
+        bookProperties = ['title', 'author', 'pages'];
+
+        //Create a cell in the first column of the bookTable number the book in each newRow
         firstCell = document.createElement('td');
         firstCell.innerHTML = i + 1;
         newRow.appendChild(firstCell);
 
+        //Create cells that match the properties of bookProperties in each newRow
         for (let j = 0; j < bookProperties.length; j++){
             cell = document.createElement('td');
             cell.innerHTML = newBook[bookProperties[j]];
 
             newRow.appendChild(cell);
         };
+        
+        //Create a checkbox input for the readIt property of each newBook
+        let readStatus = myLibrary[i].readIt;
+        let readYetCell = document.createElement('input')
+        readYetCell.type = "checkbox";
 
+        //Append checkbox to each newRow and dynamically change status of input
+        if(readStatus === "Yes"){
+            //Set status of checkbox to "checked"
+            readYetCell.click();
+            newRow.appendChild(readYetCell);
+        }else{
+            //Leaves status of checkbox as 'unchecked'
+            newRow.appendChild(readYetCell);
+        };
+
+        //Create a delete button for each newBook as an option to remove a book from myLibrary and bookTable
         let lastCell = document.createElement('td');
-        lastCell.innerHTML = "<button class='deleteBook';><strong>X</strong></button>";
+        lastCell.innerHTML = "<button class='deleteBook'><strong>X</strong></button>";
 
+        //Append delete button to newRow
         newRow.appendChild(lastCell);
 
+        //Append each newRow to bookTable
         bookTable.appendChild(newRow);
     };
 }; 
 
-listCurrentBooks();
+//Call function to list books stored in myLibrary, if any
+listBooks();
 
-// function deleteBook(){};
+//Function to remove books from myLibrary and bookTable
+function deleteBook(){
+    let thisCell = this.parentNode;
+    let cellParent = thisCell.parentNode;
+    console.log(thisCell);
+    console.log(cellParent);
+    console.log(cellParent.id);
+    console.log(myLibrary[cellParent.id]);
+    // myLibrary[thisRowId].splice();
+    // listBooks();
+};
 
 //Remove spaces from a title
 // let titleId1 = myLibrary[0].title.replace(/\s+/g, '');
 
 let addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
+let deleteButtons = document.getElementsByClassName("deleteBook");

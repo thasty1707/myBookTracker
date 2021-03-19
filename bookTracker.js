@@ -10,9 +10,8 @@ function Book(title, author, bookLength, haveReadYet){
 };
 
 //Test book data
-
-const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "Yes"));
-const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "No"));
+// const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "Yes"));
+// const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "No"));
 
 //Function to add new books to the Library
 function addBookToLibrary(){   
@@ -129,14 +128,17 @@ function listBooks(){
 
         //Create a delete button for each newBook as an option to remove a book from myLibrary and bookTable
         let lastCell = document.createElement('td');
-        lastCell.innerHTML = "<button class='deleteBook'><strong>X</strong></button>";
-
+        deleteBtn = "<button class='deleteBook'><strong>X</strong></button>";
+        // lastCell.addEventListener('click',deleteBook);
+        lastCell.innerHTML = deleteBtn;
         //Append delete button to newRow
         newRow.appendChild(lastCell);
 
         //Append each newRow to bookTable
         bookTable.appendChild(newRow);
     };
+    let deleteButtons = document.querySelectorAll(".deleteBook");
+    deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteBook));
 }; 
 
 //Call function to list books stored in myLibrary, if any
@@ -144,17 +146,17 @@ listBooks();
 
 //Function to remove books from myLibrary and bookTable
 function deleteBook(){
-    let thisCell = this.parentNode;
-    let cellParentId = thisCell.parentNode.id;
-    console.log(cellParentId);
-    myLibrary.splice(cellParentId, 1);
-
-    console.log(myLibrary);
-    
-    listBooks();
+    if(myLibrary.length > 0){
+        // let thisCell = this.parentNode;
+        let thisRow = this.parentNode;
+        let bookIndex = thisRow.id;
+        
+        console.log(myLibrary.splice(bookIndex, 1));
+        listBooks();
+    }else{
+        return;
+    }
 };
 
 
 const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
-let deleteButtons = document.querySelectorAll(".deleteBook");
-deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteBook));

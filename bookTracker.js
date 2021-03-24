@@ -30,13 +30,13 @@ function addBookToLibrary(){
     };
 
      //Check input and use values to push new object into myLibrary object
-    if(bookTitle == ""){
-        alert("Please enter a title for the new book.");
+    if(bookTitle === ""){
+        wrongInput(bookTitle);
         return;
     }else if(bookAuthor == ""){
         alert("Please enter an author for the new book.");
         return;
-    }else if(bookLength == ""){
+    }else if(bookLength === "" || isNaN(bookLength)){
         alert("Please enter the number of pages for the new book.");
         return;
     }else{
@@ -48,9 +48,6 @@ function addBookToLibrary(){
 
     //list books with new entry
     listBooks();
-
-    //Reset input fields after new entry
-    resetInput();
 };
 
 //Function to clear form fields; called after adding new Book to Library
@@ -155,6 +152,9 @@ function listBooks(){
 //Call function to list books stored in myLibrary, if any
 listBooks();
 
+//Clear form on page load or reload
+resetInput();
+
 //Function to remove books from myLibrary and bookTable
 function deleteBook(){
     if(myLibrary.length > 0){
@@ -179,7 +179,15 @@ function hideForm(){
     let bookForm = document.getElementById("addBookForm");
     bookForm.removeAttribute('class','visibleForm');
     bookForm.setAttribute('class','hiddenForm');
-}
+
+    //Clear input when form is hidden
+    resetInput();
+};
+
+function wrongInput(field){
+    field.removeAttribute('class');
+    field.setAttribute('class','inputError');
+};
 
 const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
 const newBookBtn = document.getElementById("newBook").addEventListener('click',showForm);

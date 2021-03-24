@@ -10,8 +10,9 @@ function Book(title, author, bookLength, haveReadYet){
 };
 
 //Test book data
-// const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "Yes"));
-// const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "No"));
+const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "Yes"));
+const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "No"));
+const hitchikersGuide = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543 pages","Yes"))
 
 //Function to add new books to the Library
 function addBookToLibrary(){   
@@ -30,13 +31,13 @@ function addBookToLibrary(){
 
      //Check input and use values to push new object into myLibrary object
     if(bookTitle == ""){
-        alert("Please enter a title for the new book!");
+        alert("Please enter a title for the new book.");
         return;
     }else if(bookAuthor == ""){
-        alert("Please enter an author for the new book!");
+        alert("Please enter an author for the new book.");
         return;
     }else if(bookLength == ""){
-        alert("Please enter the number of pages for the new book!");
+        alert("Please enter the number of pages for the new book.");
         return;
     }else{
         myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
@@ -104,11 +105,13 @@ function listBooks(){
         //Create a cell in the first column of the bookTable number the book in each newRow
         firstCell = document.createElement('td');
         firstCell.innerHTML = i + 1;
+        firstCell.className = "bookNum"
         newRow.appendChild(firstCell);
 
         //Create cells that match the properties of bookProperties in each newRow
         for (let j = 0; j < bookProperties.length; j++){
             cell = document.createElement('td');
+            cell.className = bookProperties[j];
             cell.innerHTML = newBook[bookProperties[j]];
 
             newRow.appendChild(cell);
@@ -116,21 +119,26 @@ function listBooks(){
         
         //Create a checkbox input for the readIt property of each newBook
         let readStatus = myLibrary[i].readIt;
-        let readYetCell = document.createElement('input')
-        readYetCell.type = "checkbox";
+        let readYetCell = document.createElement('td')
+        readYetCell.className = 'readBookYet';
+        let readYetBox = document.createElement('input')
+        readYetBox.type = "checkbox";
 
         //Append checkbox to each newRow and dynamically change status of input
         if(readStatus === "Yes"){
             //Set status of checkbox to "checked"
-            readYetCell.click();
+            readYetBox.click();
+            readYetCell.append(readYetBox);
             newRow.appendChild(readYetCell);
         }else{
             //Leaves status of checkbox as 'unchecked'
+            readYetCell.append(readYetBox);
             newRow.appendChild(readYetCell);
         };
 
         //Create a delete button for each newBook as an option to remove a book from myLibrary and bookTable
         let lastCell = document.createElement('td');
+        lastCell.className = 'deleteBtnCell';
         deleteBtn = "<button class='deleteBook'><strong>X</strong></button>";
         // lastCell.addEventListener('click',deleteBook);
         lastCell.innerHTML = deleteBtn;
@@ -175,3 +183,4 @@ function hideForm(){
 
 const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
 const newBookBtn = document.getElementById("newBook").addEventListener('click',showForm);
+const cancelBtn = document.getElementById("cancelBook").addEventListener('click',hideForm);

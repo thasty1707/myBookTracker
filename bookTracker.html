@@ -9,25 +9,18 @@
 </title>
 <body>
     <h1 id="appTitle">Book Tracker</h1>
-    <form id="addBookForm">
-        <h2 id="formTitle">Add a Book to the Tracker:</h2>
+    <button type="button" id="newBook">New Book</button>
+    <form id="addBookForm" class="hiddenForm">
+        <h2 id="formTitle">Add a Book:</h2>
         <input type="text" id="bookTitle" class="inputFields" placeholder="Title">
         <input type="text" id="bookAuthor" class="inputFields" placeholder="Author">
         <input type="text" id="bookLength" class="inputFields" placeholder="Number of Pages">
         <div id="readYetDiv">
-            <label for="#readYet" id="readYetLabel">Have you read it?</label>            
-            <input type="checkbox" id="readYet" class="inputFields" placeholder="Have you read it? (Y/N)">
+            <label for="#readYet" id="readYetLabel">Check if you have read it:</label>            
+            <input type="checkbox" id="readYet" class="inputFields">
         </div>
         <button type="button" id="addBook" class="formBtns">Add Book</button>
     </form><br><br>
-    <table id="tableOfBooks">
-        <thead>
-            <th>Book No.</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Length</th>
-            <th>Read</th>
-            <th>Delete</th>
-        </thead>
-    </table>
+    <table id="tableOfBooks"></table>
+
 </body>

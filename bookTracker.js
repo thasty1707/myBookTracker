@@ -42,6 +42,9 @@ function addBookToLibrary(){
         myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
     };
 
+    //Hide form
+    hideForm();
+
     //list books with new entry
     listBooks();
 
@@ -69,7 +72,7 @@ function listBooks(){
     };
 
     //Create headers and append to bookTable
-    let tableHeaders = ['Book No.', 'Title', 'Author', 'Length', 'Read', 'Delete']
+    let tableHeaders = ['\#', 'Title', 'Author', 'Length', 'Read', 'Delete']
 
     let bookTableHead = document.createElement('thead');
     bookTableHead.setAttribute('id', 'bookTableHead');
@@ -147,16 +150,28 @@ listBooks();
 //Function to remove books from myLibrary and bookTable
 function deleteBook(){
     if(myLibrary.length > 0){
-        // let thisCell = this.parentNode;
         let thisRow = this.parentNode;
         let bookIndex = thisRow.id;
-        
-        console.log(myLibrary.splice(bookIndex, 1));
+        myLibrary.splice(bookIndex, 1);
         listBooks();
     }else{
         return;
     }
 };
 
+//Function to show form to enter a new book
+function showForm(){
+    let bookForm = document.getElementById("addBookForm");
+    bookForm.removeAttribute('class','hiddenForm');
+    bookForm.setAttribute('class','visibleForm');
+};
+
+//Function to hide form after entering a new book
+function hideForm(){
+    let bookForm = document.getElementById("addBookForm");
+    bookForm.removeAttribute('class','visibleForm');
+    bookForm.setAttribute('class','hiddenForm');
+}
 
 const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
+const newBookBtn = document.getElementById("newBook").addEventListener('click',showForm);

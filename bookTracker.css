@@ -5,11 +5,25 @@ body{
 
 h1{
     font-size: 24px;
+    align-self: center;
+}
+
+#newBook{
+    width: 120px;
+    font-size: 16px;
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 5px;
+    align-self: center;
+}
+
+#newBook:hover{
+    background-color: lightgreen;
 }
 
 #addBookForm{
     border: 1px solid black;
-    display: grid;
+    border-radius: 5px;
     grid-template:
         .5fr 2fr 1fr
         .5fr 2fr 1fr
@@ -18,8 +32,18 @@ h1{
         .5fr 2fr 1fr
         .5fr 2fr 1fr;
     width: 700px;
+    margin: 5px auto;
     padding: .5em;
     grid-row-gap: 10px;
+    align-self: center;
+}
+
+.visibleForm{
+    display: grid;
+}
+
+.hiddenForm{
+    display: none;
 }
 
 h2{
@@ -64,8 +88,9 @@ h2{
 }
 
 table{
-    width: 750px;
+    width: 90vw;
     padding: .5em;
+    align-self: center;
     text-align: center;
 }
 

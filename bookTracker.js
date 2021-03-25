@@ -2,24 +2,24 @@ const bookTable = document.getElementById("tableOfBooks");
 
 let myLibrary = [];
 
-function Book(title, author, bookLength, haveReadYet){
+function Book(title, author, bookPages, haveReadYet){
     this.title = title
     this.author = author
-    this.pages = bookLength
+    this.pages = bookPages;
     this.readIt = haveReadYet
 };
 
 //Test book data
-const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274 pages", "Yes"));
-const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372 pages", "No"));
-const hitchikersGuide = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543 pages","Yes"))
+const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274", "Yes"));
+const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372", "No"));
+const hitchikersGuide = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543","Yes"))
 
 //Function to add new books to the Library
 function addBookToLibrary(){   
     //Pull values of input fields
     let bookTitle = document.getElementById("bookTitle").value;
     let bookAuthor = document.getElementById("bookAuthor").value;
-    let bookLength = String(document.getElementById("bookLength").value + " pages");
+    let bookLength = document.getElementById("bookLength").value;
     let readStatus = "";
 
     let readYetBox = document.getElementById("readYet");
@@ -31,13 +31,19 @@ function addBookToLibrary(){
 
      //Check input and use values to push new object into myLibrary object
     if(bookTitle === ""){
+        document.getElementById("bookTitle").setAttribute('class','inputError');
         alert("Please enter a title for the new book.");
+        document.getElementById("bookTitle").focus();
         return;
     }else if(bookAuthor == ""){
+        document.getElementById("bookAuthor").setAttribute('class','inputError');
         alert("Please enter an author for the new book.");
+        document.getElementById("bookAuthor").focus();
         return;
-    }else if(bookLength === "" || isNaN(bookLength)){
+    }else if(!bookLength || isNaN(bookLength) === true){
+        document.getElementById("bookLength").setAttribute('class','inputError');
         alert("Please enter the number of pages for the new book.");
+        document.getElementById("bookLength").focus();
         return;
     }else{
         myLibrary.push(new Book(bookTitle, bookAuthor, bookLength, readStatus));
@@ -70,7 +76,7 @@ function listBooks(){
     };
 
     //Create headers and append to bookTable
-    let tableHeaders = ['\#', 'Title', 'Author', 'Length', 'Read', 'Delete']
+    let tableHeaders = ['\#', 'Title', 'Author', 'Pages', 'Read', 'Delete']
 
     let bookTableHead = document.createElement('thead');
     bookTableHead.setAttribute('id', 'bookTableHead');
@@ -159,7 +165,8 @@ function listBooks(){
 //Function to remove books from myLibrary and bookTable
 function deleteBook(){
     if(myLibrary.length > 0){
-        let thisRow = this.parentNode;
+        let thisCell = this.parentNode;
+        let thisRow = thisCell.parentNode;
         let bookIndex = thisRow.id;
         myLibrary.splice(bookIndex, 1);
         listBooks();
@@ -186,6 +193,11 @@ function hideForm(){
     resetInput();
 };
 
+//Function to remove inputError class from input fields on change
+function removeErrorClass(){
+    this.removeAttribute('class','inputError');
+};
+
 //Function to read checkboxes in table and change readIt value in array for that book
 function changeReadYet(){
     let thisCell = this.parentNode
@@ -199,8 +211,6 @@ function changeReadYet(){
     };
 };
 
-
-
 //Call function to list books stored in myLibrary, if any
 listBooks();
 
@@ -210,3 +220,5 @@ resetInput();
 const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
 const newBookBtn = document.getElementById("newBook").addEventListener('click',showForm);
 const cancelFormBtn = document.getElementById("cancelBook").addEventListener('click',hideForm);
+
+const bookInputs = document.querySelectorAll('.inputFields').forEach(inputField => inputField.addEventListener('input',removeErrorClass))

@@ -12,7 +12,7 @@ function Book(title, author, bookPages, haveReadYet){
 //Test book data
 const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274", "Yes"));
 const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372", "No"));
-const hitchikersGuide = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543","Yes"))
+const hH2tG = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543","Yes"))
 
 //Function to add new books to the Library
 function addBookToLibrary(){   
@@ -30,19 +30,25 @@ function addBookToLibrary(){
     };
 
      //Check input and use values to push new object into myLibrary object
-    if(bookTitle === ""){
+    if(!bookTitle){
         document.getElementById("bookTitle").setAttribute('class','inputError');
         alert("Please enter a title for the new book.");
         document.getElementById("bookTitle").focus();
         return;
-    }else if(bookAuthor == ""){
+    }else if(!bookAuthor){
         document.getElementById("bookAuthor").setAttribute('class','inputError');
         alert("Please enter an author for the new book.");
         document.getElementById("bookAuthor").focus();
         return;
-    }else if(!bookLength || isNaN(bookLength) === true){
+    }else if(!bookLength){
         document.getElementById("bookLength").setAttribute('class','inputError');
         alert("Please enter the number of pages for the new book.");
+        document.getElementById("bookLength").focus();
+        return;
+    }else if(isNaN(bookLength) === true){
+        document.getElementById("bookLength").setAttribute('class','inputError');
+        alert("Please use only numbers for the Number of Pages.");
+        document.getElementById("bookLength").value = "";
         document.getElementById("bookLength").focus();
         return;
     }else{

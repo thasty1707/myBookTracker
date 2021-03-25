@@ -31,7 +31,7 @@ function addBookToLibrary(){
 
      //Check input and use values to push new object into myLibrary object
     if(bookTitle === ""){
-        wrongInput(bookTitle);
+        alert("Please enter a title for the new book.");
         return;
     }else if(bookAuthor == ""){
         alert("Please enter an author for the new book.");
@@ -120,6 +120,7 @@ function listBooks(){
         readYetCell.className = 'readBookYet';
         let readYetBox = document.createElement('input')
         readYetBox.type = "checkbox";
+        readYetBox.className = "checkBox";
 
         //Append checkbox to each newRow and dynamically change status of input
         if(readStatus === "Yes"){
@@ -145,15 +146,15 @@ function listBooks(){
         //Append each newRow to bookTable
         bookTable.appendChild(newRow);
     };
+
+    //Add eventListener to each checkbox in the bookTable
+    let checkboxes = document.querySelectorAll('.checkBox');
+    checkboxes.forEach(checkbox => checkbox.addEventListener('change',changeReadYet));
+    
+    //add eventListener to each deleteButton in the bookTable
     let deleteButtons = document.querySelectorAll(".deleteBook");
     deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteBook));
 }; 
-
-//Call function to list books stored in myLibrary, if any
-listBooks();
-
-//Clear form on page load or reload
-resetInput();
 
 //Function to remove books from myLibrary and bookTable
 function deleteBook(){
@@ -172,6 +173,7 @@ function showForm(){
     let bookForm = document.getElementById("addBookForm");
     bookForm.removeAttribute('class','hiddenForm');
     bookForm.setAttribute('class','visibleForm');
+    document.getElementById("bookTitle").focus();
 };
 
 //Function to hide form after entering a new book
@@ -184,11 +186,27 @@ function hideForm(){
     resetInput();
 };
 
-function wrongInput(field){
-    field.removeAttribute('class');
-    field.setAttribute('class','inputError');
+//Function to read checkboxes in table and change readIt value in array for that book
+function changeReadYet(){
+    let thisCell = this.parentNode
+    let thisRow = thisCell.parentNode;
+    let bookIndex = thisRow.id;
+
+    if(this.checked === true){
+        myLibrary[bookIndex].readIt = "Yes";
+    }else{
+        myLibrary[bookIndex].readIt = "No";
+    };
 };
+
+
+
+//Call function to list books stored in myLibrary, if any
+listBooks();
+
+//Clear form on page load or reload
+resetInput();
 
 const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
 const newBookBtn = document.getElementById("newBook").addEventListener('click',showForm);
-const cancelBtn = document.getElementById("cancelBook").addEventListener('click',hideForm);
+const cancelFormBtn = document.getElementById("cancelBook").addEventListener('click',hideForm);

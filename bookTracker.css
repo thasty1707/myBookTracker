@@ -3,9 +3,21 @@ body{
     flex-direction: column;
 }
 
+h1, h2 {
+    margin: 10px auto;
+
+}
+
 h1{
     font-size: 24px;
-    margin: 10px auto;
+}
+
+button{
+    padding: 2px 0 4px 0;
+}
+
+button:active{
+    transform: translateY(3px);
 }
 
 #newBook{
@@ -18,6 +30,39 @@ h1{
 }
 
 #newBook:hover{
+    background-color: lightgreen;
+}
+
+.formBtns{
+    width: 120px;
+    font-size: 16px;
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 5px;
+}
+
+#addBook{
+    margin: 5px;
+    grid-area: 1/1/2/2;
+}
+
+#cancelBook{
+    margin: 5px;
+    grid-area: 1/3/2/4;
+}
+
+#cancelBook:hover{
+    background-color: red;
+}
+
+#formBtnsDiv{
+    display: grid;
+    grid-template-columns:
+        1fr 1fr 1fr;
+    column-gap: 5px;
+}
+
+.formBtns:hover{
     background-color: lightgreen;
 }
 
@@ -43,7 +88,6 @@ h1{
 h2{
     grid-area: 1 / 1 / span 1 / span 3;
     font-size: 18px;
-    margin: 10px auto;
 }
 
 #bookTitle{
@@ -111,39 +155,6 @@ label{
 
 }
 
-#formBtnsDiv{
-    /* align-self: center; */
-    display: grid;
-    grid-template-columns:
-        1fr 1fr 1fr;
-}
-
-#addBook{
-    margin: 5px;
-    grid-area: 1/1/2/2;
-}
-
-#cancelBook{
-    margin: 5px;
-    grid-area: 1/3/2/4;
-}
-
-#cancelBook:hover{
-    background-color: red;
-}
-
-.formBtns{
-    width: 120px;
-    font-size: 16px;
-    background-color: lightskyblue;
-    border: none;
-    border-radius: 5px;
-}
-
-.formBtns:hover{
-    background-color: lightgreen;
-}
-
 table{
     width: 800px;
     padding: .5em;
@@ -189,6 +200,3 @@ tr:nth-child(odd){
     color: white;
 }
 
-button:active{
-    transform: translateY(3px);
-}

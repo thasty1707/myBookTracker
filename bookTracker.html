@@ -9,6 +9,11 @@
 </title>
 <body>
     <h1 id="appTitle"><u>Book Tracker</u></h1>
+    <div id="bookStats">
+        <p id="totalBooks"></p>
+        <p id="totalRead"></p>
+        <p id="totalUnread"></p>
+    </div>
     <button type="button" id="newBook">New Book</button>
     <form id="addBookForm" class="hiddenForm">
         <h2 id="formTitle">Add a Book:</h2>
@@ -19,8 +24,8 @@
         <input type="text" id="bookLength" class="inputFields" placeholder="# of Pages">
         <p id="pagesError" class="hiddenText">Please enter the number of pages.</p>
         <div id="readYetDiv">
-            <label for="#readYet" id="readYetLabel">Have you read it?</label>            
             <input type="checkbox" id="readYet" class="inputFields">
+            <label for="readYet" id="readYetLabel" class="checkboxLabel">I have read it.</label> 
         </div>
         <div id="formBtnsDiv">
             <button type="button" id="addBook" class="formBtns">Add Book</button>
@@ -28,5 +33,4 @@
         </div>
     </form><br><br>
     <table id="tableOfBooks"></table>
-
 </body>

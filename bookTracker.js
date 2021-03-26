@@ -10,9 +10,9 @@ function Book(title, author, bookPages, haveReadYet){
 };
 
 //Test book data
-const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274", "Yes"));
-const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372", "No"));
-const hH2tG = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543","Yes"))
+const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274", true));
+const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372", false));
+const hH2tG = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543",true))
 
 //Function to add new books to the Library
 function addBookToLibrary(){   
@@ -20,13 +20,13 @@ function addBookToLibrary(){
     let bookTitle = document.getElementById("bookTitle").value;
     let bookAuthor = document.getElementById("bookAuthor").value;
     let bookLength = document.getElementById("bookLength").value;
-    let readStatus = "";
+    let readStatus;
 
     let readYetBox = document.getElementById("readYet");
     if(readYetBox.checked === true){
-        readStatus = "Yes"
+        readStatus = true;
     }else{
-        readStatus = "No"
+        readStatus = false;
     };
 
      //Check input and use values to push new object into myLibrary object
@@ -106,14 +106,14 @@ function listBooks(){
         //Variable to create rows on the bookTable
         newRow = document.createElement("tr");
         newRow.className = "bookRow";
-        newRow.setAttribute('id',i)
+        newRow.setAttribute('id', i)
 
         //object to help with looping
         bookProperties = ['title', 'author', 'pages'];
 
         //Create a cell in the first column of the bookTable number the book in each newRow
         firstCell = document.createElement('td');
-        firstCell.innerHTML = i + 1;
+        firstCell.innerHTML = "<p class='bookNum'>" + (i + 1) + "</p>";
         firstCell.className = "bookNum"
         newRow.appendChild(firstCell);
 
@@ -121,7 +121,7 @@ function listBooks(){
         for (let j = 0; j < bookProperties.length; j++){
             cell = document.createElement('td');
             cell.className = bookProperties[j];
-            cell.innerHTML = newBook[bookProperties[j]];
+            cell.innerHTML = "<p class=" + bookProperties[j] + ">" + newBook[bookProperties[j]] + "</p>";
 
             newRow.appendChild(cell);
         };
@@ -130,12 +130,16 @@ function listBooks(){
         let readStatus = myLibrary[i].readIt;
         let readYetCell = document.createElement('td')
         readYetCell.className = 'readBookYet';
-        let readYetBox = document.createElement('input')
+               
+        let readYetBox = document.createElement('input');
         readYetBox.type = "checkbox";
         readYetBox.className = "checkBox";
 
+
+        
+
         //Append checkbox to each newRow and dynamically change status of input
-        if(readStatus === "Yes"){
+        if(readStatus === true){
             //Set status of checkbox to "checked"
             readYetBox.click();
             readYetCell.append(readYetBox);
@@ -145,6 +149,8 @@ function listBooks(){
             readYetCell.append(readYetBox);
             newRow.appendChild(readYetCell);
         };
+
+        
 
         //Create a delete button for each newBook as an option to remove a book from myLibrary and bookTable
         let lastCell = document.createElement('td');
@@ -166,6 +172,8 @@ function listBooks(){
     //add eventListener to each deleteButton in the bookTable
     let deleteButtons = document.querySelectorAll(".deleteBook");
     deleteButtons.forEach(deleteButton => deleteButton.addEventListener('click', deleteBook));
+
+    myLibraryStats();
 }; 
 
 //Function to remove books from myLibrary and bookTable
@@ -212,11 +220,27 @@ function changeReadYet(){
     let bookIndex = thisRow.id;
 
     if(this.checked === true){
-        myLibrary[bookIndex].readIt = "Yes";
+        myLibrary[bookIndex].readIt = true;
     }else{
-        myLibrary[bookIndex].readIt = "No";
+        myLibrary[bookIndex].readIt = false;
     };
+    console.log(myLibrary[bookIndex]);
+    myLibraryStats();
 };
+
+function myLibraryStats(){
+    let numRead = myLibrary.filter(function(item){
+        return item.readIt;
+    }).length;
+        
+    let numUnread = myLibrary.filter(function(item){
+        return !item.readIt;
+    }).length;;
+
+    document.getElementById('totalBooks').innerText = "Total Books: " + myLibrary.length;
+    document.getElementById('totalRead').innerText = "Books Read: " + numRead;
+    document.getElementById('totalUnread').innerText = "Books Unread: " + numUnread;
+}
 
 //Call function to list books stored in myLibrary, if any
 listBooks();

@@ -187,6 +187,7 @@ function showForm(){
     bookForm.removeAttribute('class','hiddenForm');
     bookForm.setAttribute('class','visibleForm');
     document.getElementById("bookTitle").focus();
+    document.getElementById("newBook").style.display = 'none';
 };
 
 //Function to hide form after entering a new book
@@ -194,7 +195,7 @@ function hideForm(){
     let bookForm = document.getElementById("addBookForm");
     bookForm.removeAttribute('class','visibleForm');
     bookForm.setAttribute('class','hiddenForm');
-
+    document.getElementById("newBook").style.display = '';
     //Clear input when form is hidden
     resetInput();
 };

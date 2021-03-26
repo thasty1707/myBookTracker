@@ -154,6 +154,7 @@ label{
 }
 
 table{
+    display:inline-table;
     width: 800px;
     padding: .5em;
     align-self: center;

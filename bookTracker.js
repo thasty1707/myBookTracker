@@ -9,11 +9,6 @@ function Book(title, author, bookPages, haveReadYet){
     this.readIt = haveReadYet
 };
 
-//Example Books
-const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274", true));
-const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372", false));
-const hH2tG = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543",true))
-
 //Function to add new books to the Library
 function addBookToLibrary(){   
     //Pull values of input fields

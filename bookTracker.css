@@ -39,11 +39,11 @@ p{
 }
 
 #totalRead{
-    background-color: rgba(255, 166, 0, 0.5);
+    background-color: rgba(135, 206, 250, 0.5);
 }
 
 #totalUnread{
-    background-color: rgba(135, 206, 250, 0.5);
+    background-color: rgba(255, 166, 0, 0.5);
 }
 
 button{

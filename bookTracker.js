@@ -9,7 +9,7 @@ function Book(title, author, bookPages, haveReadYet){
     this.readIt = haveReadYet
 };
 
-//Test book data
+//Example Books
 const theHobbit = myLibrary.push(new Book("The Hobbit","JRR Tolkien","274", true));
 const readyPlayer1 = myLibrary.push(new Book("Ready Player One", "Ernest Cline", "372", false));
 const hH2tG = myLibrary.push(new Book("Hitchhiker\'s Guide to the Galaxy","Douglas Adams","543",true))
@@ -247,6 +247,8 @@ listBooks();
 
 //Clear form on page load or reload
 resetInput();
+
+
 
 const addBookBtn = document.getElementById("addBook").addEventListener('click',addBookToLibrary);
 const newBookBtn = document.getElementById("newBook").addEventListener('click',showForm);
